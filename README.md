@@ -4,9 +4,14 @@ Application to read Qvec output files and produce vector and vorticity files.
 
 ## Get Started
 ```
+swift build
+```
+
+
+
+```
 cd Qvec_post_process
 cmake .
 make
-
 ```
 
