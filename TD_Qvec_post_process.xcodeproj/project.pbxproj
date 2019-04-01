@@ -23,10 +23,6 @@
 /* Begin PBXBuildFile section */
 		2203F8832250041E007E6EA2 /* Input_Files_V4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2203F87F2250041D007E6EA2 /* Input_Files_V4.swift */; };
 		2203F8842250041E007E6EA2 /* PostProcessing_Dims.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2203F8812250041D007E6EA2 /* PostProcessing_Dims.swift */; };
-		2203F89422500597007E6EA2 /* main_Qvec_pp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2203F88B22500597007E6EA2 /* main_Qvec_pp.cpp */; };
-		2203F89522500597007E6EA2 /* test_PostProcessing_Dims.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2203F88D22500597007E6EA2 /* test_PostProcessing_Dims.cpp */; };
-		2203F89622500597007E6EA2 /* td_Qvec_post_process.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2203F88F22500597007E6EA2 /* td_Qvec_post_process.cpp */; };
-		2203F89722500597007E6EA2 /* PostProcessing_Dims.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2203F89322500597007E6EA2 /* PostProcessing_Dims.cpp */; };
 		OBJ_22 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* main.swift */; };
 		OBJ_29 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_40 /* TD_Qvec_post_processTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* TD_Qvec_post_processTests.swift */; };
@@ -54,16 +50,6 @@
 		2203F87F2250041D007E6EA2 /* Input_Files_V4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input_Files_V4.swift; sourceTree = "<group>"; };
 		2203F8802250041D007E6EA2 /* Post_Processing_Dims_dims.0.0.0.V4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Post_Processing_Dims_dims.0.0.0.V4.json; sourceTree = "<group>"; };
 		2203F8812250041D007E6EA2 /* PostProcessing_Dims.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostProcessing_Dims.swift; sourceTree = "<group>"; };
-		2203F88722500588007E6EA2 /* Base_Dims.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Base_Dims.hpp; sourceTree = "<group>"; };
-		2203F88822500588007E6EA2 /* define_typealias.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = define_typealias.h; sourceTree = "<group>"; };
-		2203F88A22500597007E6EA2 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
-		2203F88B22500597007E6EA2 /* main_Qvec_pp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main_Qvec_pp.cpp; sourceTree = "<group>"; };
-		2203F88D22500597007E6EA2 /* test_PostProcessing_Dims.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test_PostProcessing_Dims.cpp; sourceTree = "<group>"; };
-		2203F88E22500597007E6EA2 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
-		2203F88F22500597007E6EA2 /* td_Qvec_post_process.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = td_Qvec_post_process.cpp; sourceTree = "<group>"; };
-		2203F89122500597007E6EA2 /* CMakeLists.txt.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt.in; sourceTree = "<group>"; };
-		2203F89222500597007E6EA2 /* PostProcessing_Dims.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PostProcessing_Dims.hpp; sourceTree = "<group>"; };
-		2203F89322500597007E6EA2 /* PostProcessing_Dims.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PostProcessing_Dims.cpp; sourceTree = "<group>"; };
 		2203F898225005AA007E6EA2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		OBJ_12 /* TD_Qvec_post_processTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TD_Qvec_post_processTests.swift; sourceTree = "<group>"; };
 		OBJ_13 /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
@@ -91,46 +77,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2203F88622500588007E6EA2 /* local_include */ = {
-			isa = PBXGroup;
-			children = (
-				2203F88722500588007E6EA2 /* Base_Dims.hpp */,
-				2203F88822500588007E6EA2 /* define_typealias.h */,
-			);
-			path = local_include;
-			sourceTree = "<group>";
-		};
-		2203F88922500597007E6EA2 /* Qvec_post_process */ = {
-			isa = PBXGroup;
-			children = (
-				2203F88C22500597007E6EA2 /* tests */,
-				2203F88A22500597007E6EA2 /* CMakeLists.txt */,
-				2203F88B22500597007E6EA2 /* main_Qvec_pp.cpp */,
-				2203F89222500597007E6EA2 /* PostProcessing_Dims.hpp */,
-				2203F89322500597007E6EA2 /* PostProcessing_Dims.cpp */,
-			);
-			path = Qvec_post_process;
-			sourceTree = "<group>";
-		};
-		2203F88C22500597007E6EA2 /* tests */ = {
-			isa = PBXGroup;
-			children = (
-				2203F88D22500597007E6EA2 /* test_PostProcessing_Dims.cpp */,
-				2203F88E22500597007E6EA2 /* CMakeLists.txt */,
-				2203F88F22500597007E6EA2 /* td_Qvec_post_process.cpp */,
-				2203F89022500597007E6EA2 /* googletest-download */,
-			);
-			path = tests;
-			sourceTree = "<group>";
-		};
-		2203F89022500597007E6EA2 /* googletest-download */ = {
-			isa = PBXGroup;
-			children = (
-				2203F89122500597007E6EA2 /* CMakeLists.txt.in */,
-			);
-			path = "googletest-download";
-			sourceTree = "<group>";
-		};
 		OBJ_10 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,18 +104,15 @@
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				2203F898225005AA007E6EA2 /* README.md */,
-				2203F88922500597007E6EA2 /* Qvec_post_process */,
-				2203F88622500588007E6EA2 /* local_include */,
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
 				OBJ_10 /* Tests */,
 				OBJ_14 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_7 /* Sources */ = {
@@ -259,7 +202,7 @@
 				English,
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_14 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -277,13 +220,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				2203F89722500597007E6EA2 /* PostProcessing_Dims.cpp in Sources */,
 				2203F8832250041E007E6EA2 /* Input_Files_V4.swift in Sources */,
 				OBJ_22 /* main.swift in Sources */,
-				2203F89622500597007E6EA2 /* td_Qvec_post_process.cpp in Sources */,
 				2203F8842250041E007E6EA2 /* PostProcessing_Dims.swift in Sources */,
-				2203F89422500597007E6EA2 /* main_Qvec_pp.cpp in Sources */,
-				2203F89522500597007E6EA2 /* test_PostProcessing_Dims.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

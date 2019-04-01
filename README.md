@@ -8,10 +8,3 @@ swift build
 ```
 
 
-
-```
-cd Qvec_post_process
-cmake .
-make
-```
-
