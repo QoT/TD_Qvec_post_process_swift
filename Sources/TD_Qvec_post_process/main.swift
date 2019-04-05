@@ -48,8 +48,8 @@ let dir = dirs[0]
 
 let PP_dim_filename = "Post_Processing_Dims_dims.0.0.0.V4.json"
 
-let PP: PP_Dim = load_json(dir, PP_dim_filename)
 
+let PP: PP_Dim = load_json(dir: dir, file: StringPP_dim_filename)
 
 let plotname = Input_Files_V4.get_plot_type_from_directory(dir: dir);
 

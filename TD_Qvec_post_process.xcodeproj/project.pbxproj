@@ -48,9 +48,9 @@
 
 /* Begin PBXFileReference section */
 		2203F87F2250041D007E6EA2 /* Input_Files_V4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input_Files_V4.swift; sourceTree = "<group>"; };
-		2203F8802250041D007E6EA2 /* Post_Processing_Dims_dims.0.0.0.V4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Post_Processing_Dims_dims.0.0.0.V4.json; sourceTree = "<group>"; };
 		2203F8812250041D007E6EA2 /* PostProcessing_Dims.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostProcessing_Dims.swift; sourceTree = "<group>"; };
 		2203F898225005AA007E6EA2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		227B6DC72253B0F2006F3187 /* Post_Processing_Dims_dims.0.0.0.V4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Post_Processing_Dims_dims.0.0.0.V4.json; sourceTree = "<group>"; };
 		OBJ_12 /* TD_Qvec_post_processTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TD_Qvec_post_processTests.swift; sourceTree = "<group>"; };
 		OBJ_13 /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
@@ -126,8 +126,8 @@
 		OBJ_8 /* TD_Qvec_post_process */ = {
 			isa = PBXGroup;
 			children = (
+				227B6DC72253B0F2006F3187 /* Post_Processing_Dims_dims.0.0.0.V4.json */,
 				2203F87F2250041D007E6EA2 /* Input_Files_V4.swift */,
-				2203F8802250041D007E6EA2 /* Post_Processing_Dims_dims.0.0.0.V4.json */,
 				2203F8812250041D007E6EA2 /* PostProcessing_Dims.swift */,
 				OBJ_9 /* main.swift */,
 			);

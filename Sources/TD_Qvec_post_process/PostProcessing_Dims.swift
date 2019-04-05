@@ -16,27 +16,27 @@ struct PP_Dim: Decodable {
     let name: String
     let function: String
     let dirname: String
-    let cut_at: String
-    let Q_output_length: String
+    let cut_at: tNi
+    let Q_output_length: Int
     let note: String
 
-    let ngx: String
-    let ngy: String
-    let ngz: String
-    let grid_x: String
-    let grid_y: String
-    let grid_z: String
+    let ngx: t3d
+    let ngy: t3d
+    let ngz: t3d
+    let grid_x: tNi
+    let grid_y: tNi
+    let grid_z: tNi
 
-    let file_height: String
-    let file_width: String
-    let total_height: String
-    let total_width: String
+    let file_height: tNi
+    let file_width: tNi
+    let total_height: tNi
+    let total_width: tNi
 
-    let step: String
-    let teta: String
-    let initial_rho: String
-    let re_m_nondimensional: String
-    let uav: String
+    let step: tStep
+    let teta: tGeomShape
+    let initial_rho: tQvec
+    let re_m_nondimensional: tQvec
+    let uav: tQvec
 }
 
 
