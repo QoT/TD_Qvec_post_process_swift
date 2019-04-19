@@ -10,14 +10,14 @@ plot_*
 
 #ide
 .DS_Store
-TD-Qvec-post-process.xcodeproj/project.xcworkspace/xcuserdata/
-td_qvec_post_process.xcodeproj/xcshareddata/
-
+TD_Qvec_post_process.xcodeproj/project.xcworkspace/xcuserdata/
+TD_Qvec_post_process.xcodeproj/xcshareddata/
+/.build
 #googletest
 googletest-*
 td_pp_tests
-
-
+/Packages
+/*.xcodeproj
 #cmake
 CMakeCache.txt
 CMakeFiles/
@@ -28,4 +28,3 @@ Makefile
 a.out
 td_post_process_V4
 q4_pp_V3
-td_Qvec_post_process
