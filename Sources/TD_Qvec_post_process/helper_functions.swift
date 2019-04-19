@@ -29,14 +29,7 @@ protocol DefaultValuable {
     static func defaultValue() -> Self
 }
 
-
-protocol TypeResolving {
-//    static func typeResolving() -> AnyClass.Type
-    static func contentType() -> Any.Type
-}
-
 func sizeof<T>(_ t: T) -> Int {
-//    print("sizeof",T.self,"is",MemoryLayout<T>.size)
     return MemoryLayout<T>.size
 }
 

@@ -26,12 +26,13 @@ struct Node_Bounds {
     var k1: tNi = 0;    
 };
 
-struct Matrix1D<T: DefaultValuable>: TypeResolving {
-    
-//    // this relates to Matrix content, not Matrix itself
-//    static func defaultValue() -> Matrix1D<T> {
-//        return Matrix1D<T>(rows: 1)
-//    }
+func array<T>(grid: inout [T], generating t: () -> T, count: Int) {
+    for _ in 0..<count {
+        grid.append(t())
+    }
+}
+
+struct Matrix1D<T: DefaultValuable> {
     
     static func contentType() -> Any.Type {
         return T.self
@@ -43,12 +44,12 @@ struct Matrix1D<T: DefaultValuable>: TypeResolving {
     init() {
         self.init(rows: 0)
     }
-    
     init(rows: Int) {
         
         self.rows = rows
         
-        grid = Array(repeating: T.defaultValue(), count: rows)
+        grid = Array()
+        array(grid: &grid, generating: T.defaultValue, count: rows)
     }
     func indexIsValid(row: Int) -> Bool {
         return row >= 0 && row < rows
@@ -86,6 +87,8 @@ struct Matrix2D<T: DefaultValuable> {
 //        grid = Array(repeating: T.defaultValue(), count: rows * columns)
         
         printMigration("Matrix2D - It seems quite strange since col,row goes beyond array dim so fix it - add +2 for all axis")
+        
+        // this form of array creation is valid only for pass-by-value content types like Float, Int, structs but not for classes
         grid = Array(repeating: T.defaultValue(), count: (rows+2) * (columns+2))
 
     }
@@ -143,6 +146,8 @@ struct Matrix3D<T: DefaultValuable> {
 //        grid = Array(repeating: T.defaultValue(), count: rows * columns * planes)
         
         printMigration("Matrix3D - It seems quite strange since col,row goes beyond array dim so fix it - add +2 for all axis")
+        
+        // this form of array creation is valid only for pass-by-value content types like Float, Int, structs but not for classes
         grid = Array(repeating: T.defaultValue(), count: (rows+2) * (columns+2) * (planes+2))
     }
     func indexIsValid(row: Int, column: Int, plane: Int) -> Bool {

@@ -265,7 +265,6 @@ func calc_rho_ux_uy_uz( _ num_layers: Int, _ Q_plane: Matrix3D_array<tQvec>, _ F
                 
                 rho[layer][pos] = Q_plane[layer][posPQ + 0];
                 
-                
                 ux[layer][pos] = (Q_plane[layer][posPQ + 1] + 0.5 * F_plane[layer][posPF + 0]) / rho[layer][pos];
                 uy[layer][pos] = (Q_plane[layer][posPQ + 2] + 0.5 * F_plane[layer][posPF + 1]) / rho[layer][pos];
                 uz[layer][pos] = (Q_plane[layer][posPQ + 3] + 0.5 * F_plane[layer][posPF + 2]) / rho[layer][pos];

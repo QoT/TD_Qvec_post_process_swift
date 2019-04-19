@@ -254,8 +254,6 @@ func main(argc: Int, argv: [String]) -> Int {
         input.load_plane(num_layers, &load_dir, &Q_plane, &F_plane, &pp);
 
 
-        print("Q_plane",Q_plane.count)
-        print("Q_plane",Q_plane[0].rows)
         calc_rho_ux_uy_uz(num_layers, Q_plane, F_plane, &rho, &ux, &uy, &uz, &pp);
 
 
