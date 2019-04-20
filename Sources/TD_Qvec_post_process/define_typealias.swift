@@ -21,6 +21,7 @@ typealias  let_tNi = Int32;// const long int
 
 
 
+typealias tQvec_Double = Double;
 typealias tQvec = Float;
 typealias tForce = Float;
 

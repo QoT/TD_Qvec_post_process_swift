@@ -211,20 +211,15 @@ func main(argc: Int, argv: [String]) -> Int {
 //        tQvec* uy[5];
 //        tQvec* uz[5];
         
-        let matrix_tQvec_3D = Matrix3D<tQvec>(rows: Int(pp.total_width), columns: Int(pp.total_height), planes: pp.Q_output_length)
-        let matrix_tQvec_2D = Matrix2D<tQvec>(rows: Int(pp.total_width), columns: Int(pp.total_height))
-        let matrix_tForce_3D = Matrix3D<tForce>(rows: Int(pp.total_width), columns: Int(pp.total_height), planes: 3)
-
-        var Q_plane: Matrix3D_array<tQvec> = Array(repeating: matrix_tQvec_3D, count: 5)
-        
+        var Q_plane: Matrix3D_array<tQvec> = Matrix3D.array(rows: Int(pp.total_width), columns: Int(pp.total_height), planes: pp.Q_output_length, count: 5)
+                
         // C++ migration discrepancy: F_plane was initialised as *tForce while later silently transformed into *tQvec (which resloves to the same 'Float' type so no big deal)
-        var F_plane: Matrix3D_array<tForce> = Array(repeating: matrix_tForce_3D, count: 5)
+        var F_plane: Matrix3D_array<tForce> = Matrix3D.array(rows: Int(pp.total_width), columns: Int(pp.total_height), planes: 3, count: 5)
         
-        var rho: Matrix2D_array<tQvec> = Array(repeating: matrix_tQvec_2D, count: 5)
-        var ux: Matrix2D_array<tQvec> = Array(repeating: matrix_tQvec_2D, count: 5)
-        var uy: Matrix2D_array<tQvec> = Array(repeating: matrix_tQvec_2D, count: 5)
-        var uz: Matrix2D_array<tQvec> = Array(repeating: matrix_tQvec_2D, count: 5)
-
+        var rho: Matrix2D_array<tQvec> = Matrix2D.array(rows: Int(pp.total_width), columns: Int(pp.total_height), count: 5)
+        var ux: Matrix2D_array<tQvec> = Matrix2D.array(rows: Int(pp.total_width), columns: Int(pp.total_height), count: 5)
+        var uy: Matrix2D_array<tQvec> = Matrix2D.array(rows: Int(pp.total_width), columns: Int(pp.total_height), count: 5)
+        var uz: Matrix2D_array<tQvec> = Matrix2D.array(rows: Int(pp.total_width), columns: Int(pp.total_height), count: 5)
 
         var num_layers: Int = 1;
         if (vort && plotname == "rotational_capture") {
@@ -247,7 +242,7 @@ func main(argc: Int, argv: [String]) -> Int {
 //        }
 
 //        tQvec* uxyz_log_vort = (tQvec *)malloc(sizeof(tQvec) * pp.total_height * pp.total_width);
-        var uxyz_log_vort: Matrix2D<tQvec> = matrix_tQvec_2D
+        var uxyz_log_vort: Matrix2D<tQvec> = Matrix2D<tQvec>(rows: Int(pp.total_width), columns: Int(pp.total_height))
 
 
 
@@ -265,18 +260,20 @@ func main(argc: Int, argv: [String]) -> Int {
 
 
 
-        var output: Int = 0;
+        let output: Int = 0;
+        write_file_with_border(0, load_dir, "Qvec_rho.bin", rho[output], pp);
 
-        write_file_with_border(0, load_dir, "Qvec_rho.bin", &rho[output], &pp);
-
-        write_file_with_border(0, load_dir, "Qvec_ux.bin", &ux[output], &pp);
-        write_file_with_border(0, load_dir, "Qvec_uy.bin", &uy[output], &pp);
-        write_file_with_border(0, load_dir, "Qvec_uz.bin", &uz[output], &pp);
-
-
-        write_file_with_border(1, load_dir, "Qvec_uxyz_log_vort.bin", &uxyz_log_vort, &pp);
+        write_file_with_border(0, load_dir, "Qvec_ux.bin", ux[output], pp);
+        write_file_with_border(0, load_dir, "Qvec_uy.bin", uy[output], pp);
+        write_file_with_border(0, load_dir, "Qvec_uz.bin", uz[output], pp);
 
 
+        write_file_with_border(1, load_dir, "Qvec_uxyz_log_vort.bin", uxyz_log_vort, pp);
+
+        write_file_with_border(0, load_dir, "Qvec_rho1.bin", rho[1], pp);
+
+        write_file_with_border(0, load_dir, "Qvec_ux1.bin", ux[1], pp);
+        write_file_with_border(0, load_dir, "Qvec_ux2.bin", ux[2], pp);
 
 
 

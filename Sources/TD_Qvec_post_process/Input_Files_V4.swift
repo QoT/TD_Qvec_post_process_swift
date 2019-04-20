@@ -459,10 +459,10 @@ class Input_FILES_V4 {
             if let tx = Range(range[0].range(at: 1), in: delta_load_dir) {
                 let lastIndexAsString = delta_load_dir[tx]
                 if let lastIndex = Int(String(lastIndexAsString)) {
-                    let delta = String(lastIndex + 1)
+                    let deltaAsString = String(lastIndex + delta)
                     if let range = Range(range[0].range(at: 1), in: delta_load_dir) {
-                        delta_load_dir.replaceSubrange(range, with: delta)
-                        printMigration("get_dir_delta() (DEBUG) - converted \(load_dir) -> \(delta_load_dir)",checked: true)
+                        delta_load_dir.replaceSubrange(range, with: deltaAsString)
+                        printMigration("get_dir_delta() (DEBUG) - converted \(delta) \(load_dir) -> \(delta_load_dir)",checked: true)
                     }
                     else {
                         printError("get_dir_delta() - cannot detect range \(range[0].range(at: 1)) in \(delta_load_dir)")
@@ -695,25 +695,13 @@ class Input_FILES_V4 {
                     
                     if (q.struct_name == "tDisk_colrow_Q4_V4"){
                         
-//                        print("e",u,Disk_colrow_Q4[Int(u)].col,Disk_colrow_Q4[Int(u)].row)
                         let col: tNi = tNi(Disk_colrow_Q4[Int(u)].col);
                         let row: tNi = tNi(Disk_colrow_Q4[Int(u)].row);
-                        
-                        //    print("plane",Disk_colrow_Q4[Int(u)].s[0])
-                        //    print("b", Disk_colrow_Q4[Int(u)].s[0])
-                        //        print("b", Disk_colrow_Q4[Int(u)].s[1])
-                        //        print("b", Disk_colrow_Q4[Int(u)].s[2])
-                        //        print("b", Disk_colrow_Q4[Int(u)].s[3])
                         
                         plane[ twoD_colrow_len(col, row, pp.total_height, length) + 0] = Disk_colrow_Q4[Int(u)].s[0];
                         plane[ twoD_colrow_len(col, row, pp.total_height, length) + 1] = Disk_colrow_Q4[Int(u)].s[1];
                         plane[ twoD_colrow_len(col, row, pp.total_height, length) + 2] = Disk_colrow_Q4[Int(u)].s[2];
                         plane[ twoD_colrow_len(col, row, pp.total_height, length) + 3] = Disk_colrow_Q4[Int(u)].s[3];
-                        //        print("c", plane[ twoD_colrow_len(col, row, pp.total_height, length) + 0])
-                        //        print("c", plane[ twoD_colrow_len(col, row, pp.total_height, length) + 1])
-                        //        print("c", plane[ twoD_colrow_len(col, row, pp.total_height, length) + 2])
-                        //        print("c", plane[ twoD_colrow_len(col, row, pp.total_height, length) + 3])
-                        //print("d",col, row, twoD_colrow_len(col, row, pp.total_height, length))
                         
                     } else if (q.struct_name == "tDisk_grid_colrow_Q4_V4"){
                         
@@ -804,6 +792,12 @@ func path_exists(_ path: String) -> Bool {
 }
 
 func xpath_exists( _ path: String) -> Bool {
+    //    if (FILE *file = fopen(path.c_str(), "r")) {
+    //        fclose(file);
+    //        return true;
+    //    } else {
+    //        return false;
+    //    }
     return path_exists(path)
 }
 

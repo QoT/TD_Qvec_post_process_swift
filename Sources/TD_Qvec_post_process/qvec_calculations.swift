@@ -14,11 +14,10 @@ import Foundation
 //  Copyright © 2019 Nile Ó Broin. All rights reserved.
 //
 
-func write_file_with_border( _ b: tNi, _ dir: String, _ filename: String, _ data: inout Matrix2D<tQvec>, _ pp: inout PP_Dims) {
-    
+func write_file_with_border( _ b: tNi, _ dir: String, _ filename: String, _ data: Matrix2D<tQvec>, _ pp: PP_Dims) {
+    var data = data
     let filepath: String = dir + "/" + filename;
     
-//    FILE *fp_output = fopen(filepath.c_str(), "wb");
     let fp_output: UnsafeMutablePointer<FILE>! = fopen(filepath.c_str(), "wb");
 
     printLog("WRITING FILE " + filepath)
@@ -77,56 +76,53 @@ func write_file_with_border( _ b: tNi, _ dir: String, _ filename: String, _ data
 
 
 
-@inline(__always) func calc_XY_vorticity( _ c: tNi, _ r: tNi, _ h: tNi, _ ux: Matrix2D_array<tQvec>, _ uy: Matrix2D_array<tQvec>, _ uz: Matrix2D_array<tQvec>, _ uxyz_log_vort: Matrix2D<tQvec>, _ uxx: inout tQvec, _ uxy: inout tQvec, _ uxz: inout tQvec, _ uyx: inout tQvec, _ uyy: inout tQvec, _ uyz: inout tQvec, _ uzx: inout tQvec, _ uzy: inout tQvec, _ uzz: inout tQvec) {
+@inline(__always) func calc_XY_vorticity( _ c: tNi, _ r: tNi, _ h: tNi, _ ux: Matrix2D_array<tQvec>, _ uy: Matrix2D_array<tQvec>, _ uz: Matrix2D_array<tQvec>, _ uxyz_log_vort: Matrix2D<tQvec>, _ uxx: inout tQvec_Double, _ uxy: inout tQvec_Double, _ uxz: inout tQvec_Double, _ uyx: inout tQvec_Double, _ uyy: inout tQvec_Double, _ uyz: inout tQvec_Double, _ uzx: inout tQvec_Double, _ uzy: inout tQvec_Double, _ uzz: inout tQvec_Double) {
+
+    uxx = 0.5*(Double(ux[0][twoD_colrow(c+1, r  , h)]) - Double(ux[0][twoD_colrow(c-1, r  , h)]))
+    uxy = 0.5*(Double(ux[0][twoD_colrow(c  , r+1, h)]) - Double(ux[0][twoD_colrow(c  , r-1, h)]))
+    uxz = 0.5*(Double(ux[2][twoD_colrow(c  , r  , h)]) - Double(ux[1][twoD_colrow(c  , r  , h)]))
     
-//    print(ux[0].grid)
+    uyx = 0.5*(Double(uy[0][twoD_colrow(c+1, r  , h)]) - Double(uy[0][twoD_colrow(c-1, r  , h)]))
+    uyy = 0.5*(Double(uy[0][twoD_colrow(c  , r+1, h)]) - Double(uy[0][twoD_colrow(c  , r-1, h)]))
+    uyz = 0.5*(Double(uy[2][twoD_colrow(c  , r  , h)]) - Double(uy[1][twoD_colrow(c  , r  , h)]))
     
-    uxx = 0.5*(ux[0][twoD_colrow(c+1, r  , h)] - ux[0][twoD_colrow(c-1, r  , h)]);
-    uxy = 0.5*(ux[0][twoD_colrow(c  , r+1, h)] - ux[0][twoD_colrow(c  , r-1, h)]);
-    uxz = 0.5*(ux[2][twoD_colrow(c  , r  , h)] - ux[1][twoD_colrow(c  , r  , h)]);
-    
-    uyx = 0.5*(uy[0][twoD_colrow(c+1, r  , h)] - uy[0][twoD_colrow(c-1, r  , h)]);
-    uyy = 0.5*(uy[0][twoD_colrow(c  , r+1, h)] - uy[0][twoD_colrow(c  , r-1, h)]);
-    uyz = 0.5*(uy[2][twoD_colrow(c  , r  , h)] - uy[1][twoD_colrow(c  , r  , h)]);
-    
-    uzx = 0.5*(uz[0][twoD_colrow(c+1, r  , h)] - uz[0][twoD_colrow(c-1, r  , h)]);
-    uzy = 0.5*(uz[0][twoD_colrow(c  , r+1, h)] - uz[0][twoD_colrow(c  , r-1, h)]);
-    uzz = 0.5*(uz[2][twoD_colrow(c  , r  , h)] - uz[1][twoD_colrow(c  , r  , h)]);
-//    print("uxx", uxx)
+    uzx = 0.5*(Double(uz[0][twoD_colrow(c+1, r  , h)]) - Double(uz[0][twoD_colrow(c-1, r  , h)]))
+    uzy = 0.5*(Double(uz[0][twoD_colrow(c  , r+1, h)]) - Double(uz[0][twoD_colrow(c  , r-1, h)]))
+    uzz = 0.5*(Double(uz[2][twoD_colrow(c  , r  , h)]) - Double(uz[1][twoD_colrow(c  , r  , h)]))
 }
 
 
 
-@inline(__always) func calc_XZ_vorticity( _ c: tNi, _ r: tNi, _ h: tNi, _ ux: Matrix2D_array<tQvec>, _ uy: Matrix2D_array<tQvec>, _ uz: Matrix2D_array<tQvec>, _ uxyz_log_vort: Matrix2D<tQvec>, _ uxx: inout tQvec, _ uxy: inout tQvec, _ uxz: inout tQvec, _ uyx: inout tQvec, _ uyy: inout tQvec, _ uyz: inout tQvec, _ uzx: inout tQvec, _ uzy: inout tQvec, _ uzz: inout tQvec) {
+@inline(__always) func calc_XZ_vorticity( _ c: tNi, _ r: tNi, _ h: tNi, _ ux: Matrix2D_array<tQvec>, _ uy: Matrix2D_array<tQvec>, _ uz: Matrix2D_array<tQvec>, _ uxyz_log_vort: Matrix2D<tQvec>, _ uxx: inout tQvec_Double, _ uxy: inout tQvec_Double, _ uxz: inout tQvec_Double, _ uyx: inout tQvec_Double, _ uyy: inout tQvec_Double, _ uyz: inout tQvec_Double, _ uzx: inout tQvec_Double, _ uzy: inout tQvec_Double, _ uzz: inout tQvec_Double) {
     
-    uxx = 0.5*(ux[0][twoD_colrow(c+1, r  , h)] - ux[0][twoD_colrow(c-1, r  , h)]);
-    uxy = 0.5*(ux[2][twoD_colrow(c  , r  , h)] - ux[1][twoD_colrow(c  , r  , h)]);
-    uxz = 0.5*(ux[0][twoD_colrow(c  , r+1, h)] - ux[0][twoD_colrow(c  , r-1, h)]);
-    
-    uyx = 0.5*(uy[0][twoD_colrow(c+1, r  , h)] - uy[0][twoD_colrow(c-1, r  , h)]);
-    uyy = 0.5*(uy[2][twoD_colrow(c  , r  , h)] - uy[1][twoD_colrow(c  , r  , h)]);
-    uyz = 0.5*(uy[0][twoD_colrow(c  , r+1, h)] - uy[0][twoD_colrow(c  , r-1, h)]);
-    
-    uzx = 0.5*(uz[0][twoD_colrow(c+1, r  , h)] - uz[0][twoD_colrow(c-1, r  , h)]);
-    uzy = 0.5*(uz[2][twoD_colrow(c  , r  , h)] - uz[1][twoD_colrow(c  , r  , h)]);
-    uzz = 0.5*(uz[0][twoD_colrow(c  , r+1, h)] - uz[0][twoD_colrow(c  , r-1, h)]);
+    uxx = 0.5*(Double(ux[0][twoD_colrow(c+1, r  , h)]) - Double(ux[0][twoD_colrow(c-1, r  , h)]))
+    uxy = 0.5*(Double(ux[2][twoD_colrow(c  , r  , h)]) - Double(ux[1][twoD_colrow(c  , r  , h)]))
+    uxz = 0.5*(Double(ux[0][twoD_colrow(c  , r+1, h)]) - Double(ux[0][twoD_colrow(c  , r-1, h)]))
+
+    uyx = 0.5*(Double(uy[0][twoD_colrow(c+1, r  , h)]) - Double(uy[0][twoD_colrow(c-1, r  , h)]))
+    uyy = 0.5*(Double(uy[2][twoD_colrow(c  , r  , h)]) - Double(uy[1][twoD_colrow(c  , r  , h)]))
+    uyz = 0.5*(Double(uy[0][twoD_colrow(c  , r+1, h)]) - Double(uy[0][twoD_colrow(c  , r-1, h)]))
+
+    uzx = 0.5*(Double(uz[0][twoD_colrow(c+1, r  , h)]) - Double(uz[0][twoD_colrow(c-1, r  , h)]))
+    uzy = 0.5*(Double(uz[2][twoD_colrow(c  , r  , h)]) - Double(uz[1][twoD_colrow(c  , r  , h)]))
+    uzz = 0.5*(Double(uz[0][twoD_colrow(c  , r+1, h)]) - Double(uz[0][twoD_colrow(c  , r-1, h)]))
 }
 
 
 
-@inline(__always) func calc_YZ_vorticity( _ c: tNi, _ r: tNi, _ h: tNi, _ ux: Matrix2D_array<tQvec>, _ uy: Matrix2D_array<tQvec>, _ uz: Matrix2D_array<tQvec>, _ uxyz_log_vort: Matrix2D<tQvec>, _ uxx: inout tQvec, _ uxy: inout tQvec, _ uxz: inout tQvec, _ uyx: inout tQvec, _ uyy: inout tQvec, _ uyz: inout tQvec, _ uzx: inout tQvec, _ uzy: inout tQvec, _ uzz: inout tQvec) {
+@inline(__always) func calc_YZ_vorticity( _ c: tNi, _ r: tNi, _ h: tNi, _ ux: Matrix2D_array<tQvec>, _ uy: Matrix2D_array<tQvec>, _ uz: Matrix2D_array<tQvec>, _ uxyz_log_vort: Matrix2D<tQvec>, _ uxx: inout tQvec_Double, _ uxy: inout tQvec_Double, _ uxz: inout tQvec_Double, _ uyx: inout tQvec_Double, _ uyy: inout tQvec_Double, _ uyz: inout tQvec_Double, _ uzx: inout tQvec_Double, _ uzy: inout tQvec_Double, _ uzz: inout tQvec_Double) {
     
-    uxx = 0.5*(ux[2][twoD_colrow(c  , r  , h)] - ux[1][twoD_colrow(c  , r  , h)]);
-    uxy = 0.5*(ux[0][twoD_colrow(c, r+1  , h)] - ux[0][twoD_colrow(c,   r-1, h)]);
-    uxz = 0.5*(ux[0][twoD_colrow(c+1  , r, h)] - ux[0][twoD_colrow(c-1, r,   h)]);
-    
-    uyx = 0.5*(uy[2][twoD_colrow(c  , r  , h)] - uy[1][twoD_colrow(c  , r  , h)]);
-    uyy = 0.5*(uy[0][twoD_colrow(c  , r+1, h)] - uy[0][twoD_colrow(c  , r-1, h)]);
-    uyz = 0.5*(uy[0][twoD_colrow(c+1, r  , h)] - uy[0][twoD_colrow(c-1, r  , h)]);
-    
-    uzx = 0.5*(uz[2][twoD_colrow(c  , r  , h)] - uz[1][twoD_colrow(c  , r  , h)]);
-    uzy = 0.5*(uz[0][twoD_colrow(c  , r+1, h)] - uz[0][twoD_colrow(c  , r-1, h)]);
-    uzz = 0.5*(uz[0][twoD_colrow(c+1, r  , h)] - uz[0][twoD_colrow(c-1, r  , h)]);
+    uxx = 0.5*(Double(ux[2][twoD_colrow(c  , r  , h)]) - Double(ux[1][twoD_colrow(c  , r  , h)]))
+    uxy = 0.5*(Double(ux[0][twoD_colrow(c, r+1  , h)]) - Double(ux[0][twoD_colrow(c,   r-1, h)]))
+    uxz = 0.5*(Double(ux[0][twoD_colrow(c+1  , r, h)]) - Double(ux[0][twoD_colrow(c-1, r,   h)]))
+
+    uyx = 0.5*(Double(uy[2][twoD_colrow(c  , r  , h)]) - Double(uy[1][twoD_colrow(c  , r  , h)]))
+    uyy = 0.5*(Double(uy[0][twoD_colrow(c  , r+1, h)]) - Double(uy[0][twoD_colrow(c  , r-1, h)]))
+    uyz = 0.5*(Double(uy[0][twoD_colrow(c+1, r  , h)]) - Double(uy[0][twoD_colrow(c-1, r  , h)]))
+
+    uzx = 0.5*(Double(uz[2][twoD_colrow(c  , r  , h)]) - Double(uz[1][twoD_colrow(c  , r  , h)]))
+    uzy = 0.5*(Double(uz[0][twoD_colrow(c  , r+1, h)]) - Double(uz[0][twoD_colrow(c  , r-1, h)]))
+    uzz = 0.5*(Double(uz[0][twoD_colrow(c+1, r  , h)]) - Double(uz[0][twoD_colrow(c-1, r  , h)]))
     
 }
 
@@ -134,7 +130,7 @@ func write_file_with_border( _ b: tNi, _ dir: String, _ filename: String, _ data
 
 
 
-@inline(__always) func calc_ROTATIONAL_vorticity( _ c: tNi, _ r: tNi, _ h: tNi, _ ux: Matrix2D_array<tQvec>, _ uy: Matrix2D_array<tQvec>, _ uz: Matrix2D_array<tQvec>, _ uxyz_log_vort: Matrix2D<tQvec>, _ uxx: inout tQvec, _ uxy: inout tQvec, _ uxz: inout tQvec, _ uyx: inout tQvec, _ uyy: inout tQvec, _ uyz: inout tQvec, _ uzx: inout tQvec, _ uzy: inout tQvec, _ uzz: inout tQvec) {
+@inline(__always) func calc_ROTATIONAL_vorticity( _ c: tNi, _ r: tNi, _ h: tNi, _ ux: Matrix2D_array<tQvec>, _ uy: Matrix2D_array<tQvec>, _ uz: Matrix2D_array<tQvec>, _ uxyz_log_vort: Matrix2D<tQvec>, _ uxx: inout tQvec_Double, _ uxy: inout tQvec_Double, _ uxz: inout tQvec_Double, _ uyx: inout tQvec_Double, _ uyy: inout tQvec_Double, _ uyz: inout tQvec_Double, _ uzx: inout tQvec_Double, _ uzy: inout tQvec_Double, _ uzz: inout tQvec_Double) {
     
     
     //col is i
@@ -151,18 +147,18 @@ func write_file_with_border( _ b: tNi, _ dir: String, _ filename: String, _ data
     
     
     
-    uxx = 0.5*(ux[2][twoD_colrow(c,   r  , h)] - ux[1][twoD_colrow(c,   r  , h)]);
-    uxy = 0.5*(ux[0][twoD_colrow(c,   r+1, h)] - ux[0][twoD_colrow(c,   r-1, h)]);
-    uxz = 0.5*(ux[4][twoD_colrow(c,   r  , h)] - ux[3][twoD_colrow(c  , r  , h)]);
-    
-    uyx = 0.5*(uy[2][twoD_colrow(c,   r  , h)] - uy[1][twoD_colrow(c,   r  , h)]);
-    uyy = 0.5*(uy[0][twoD_colrow(c,   r+1, h)] - uy[0][twoD_colrow(c,   r-1, h)]);
-    uyz = 0.5*(uy[4][twoD_colrow(c  , r  , h)] - uy[3][twoD_colrow(c  , r  , h)]);
-    
-    
-    uzx = 0.5*(uz[2][twoD_colrow(c,   r  , h)] - uz[1][twoD_colrow(c,   r  , h)]);
-    uzy = 0.5*(uz[0][twoD_colrow(c,   r+1, h)] - uz[0][twoD_colrow(c,   r-1, h)]);
-    uzz = 0.5*(uz[4][twoD_colrow(c  , r  , h)] - uz[3][twoD_colrow(c  , r  , h)]);
+    uxx = 0.5*(Double(ux[2][twoD_colrow(c,   r  , h)]) - Double(ux[1][twoD_colrow(c,   r  , h)]))
+    uxy = 0.5*(Double(ux[0][twoD_colrow(c,   r+1, h)]) - Double(ux[0][twoD_colrow(c,   r-1, h)]))
+    uxz = 0.5*(Double(ux[4][twoD_colrow(c,   r  , h)]) - Double(ux[3][twoD_colrow(c  , r  , h)]))
+
+    uyx = 0.5*(Double(uy[2][twoD_colrow(c,   r  , h)]) - Double(uy[1][twoD_colrow(c,   r  , h)]))
+    uyy = 0.5*(Double(uy[0][twoD_colrow(c,   r+1, h)]) - Double(uy[0][twoD_colrow(c,   r-1, h)]))
+    uyz = 0.5*(Double(uy[4][twoD_colrow(c  , r  , h)]) - Double(uy[3][twoD_colrow(c  , r  , h)]))
+
+
+    uzx = 0.5*(Double(uz[2][twoD_colrow(c,   r  , h)]) - Double(uz[1][twoD_colrow(c,   r  , h)]))
+    uzy = 0.5*(Double(uz[0][twoD_colrow(c,   r+1, h)]) - Double(uz[0][twoD_colrow(c,   r-1, h)]))
+    uzz = 0.5*(Double(uz[4][twoD_colrow(c  , r  , h)]) - Double(uz[3][twoD_colrow(c  , r  , h)]))
     
     
 }
@@ -186,13 +182,12 @@ func calc_vorticity( _ input: inout Input_FILES_V4, _ load_dir: inout basic_stri
     for c in 1..<pp.total_width {
         for r in 1..<pp.total_height {
             
-            var uxx: tQvec = 0.0, uxy: tQvec = 0.0, uxz: tQvec = 0.0;
+            var uxx: tQvec_Double = 0.0, uxy: tQvec_Double = 0.0, uxz: tQvec_Double = 0.0;
             
-            var uyx: tQvec = 0.0, uyy: tQvec = 0.0, uyz: tQvec = 0.0;
+            var uyx: tQvec_Double = 0.0, uyy: tQvec_Double = 0.0, uyz: tQvec_Double = 0.0;
             
-            var uzx: tQvec = 0.0, uzy: tQvec = 0.0, uzz: tQvec = 0.0;
-            
-            
+            var uzx: tQvec_Double = 0.0, uzy: tQvec_Double = 0.0, uzz: tQvec_Double = 0.0;
+
             
             
             if (plotname == "XYplane") {
@@ -223,15 +218,19 @@ func calc_vorticity( _ input: inout Input_FILES_V4, _ load_dir: inout basic_stri
                 return;
             }
             
-            let uyz_uzy: tQvec = uyz - uzy;
-            let uzx_uxz: tQvec = uzx - uxz;
-            let uxy_uyx: tQvec = uxy - uyx;
+//            print(Float(uxx), Float(uxy), Float(uxz), Float(uyx), Float(uyy), Float(uyz), Float(uzx), Float(uzy), Float(uzz))
             
-            uxyz_log_vort[ twoD_colrow(c, r, h)] = logf(uyz_uzy * uyz_uzy + uzx_uxz * uzx_uxz + uxy_uyx * uxy_uyx);
+//            print(uxx)
             
+            let uyz_uzy: tQvec_Double = uyz - uzy;
+            let uzx_uxz: tQvec_Double = uzx - uxz;
+            let uxy_uyx: tQvec_Double = uxy - uyx;
+            uxyz_log_vort[ twoD_colrow(c, r, h)] = Float(log(Double(uyz_uzy) * Double(uyz_uzy) + Double(uzx_uxz) * Double(uzx_uxz) + Double(uxy_uyx) * Double(uxy_uyx)))
+            
+//            print(c,r,h,uxyz_log_vort[ twoD_colrow(c, r, h)])
+
         }}
-    
-    
+
 }
 
 
@@ -262,12 +261,11 @@ func calc_rho_ux_uy_uz( _ num_layers: Int, _ Q_plane: Matrix3D_array<tQvec>, _ F
                 let pos: tNi = twoD_colrow(col, row, pp.total_height);
                 
                 
-                
                 rho[layer][pos] = Q_plane[layer][posPQ + 0];
                 
-                ux[layer][pos] = (Q_plane[layer][posPQ + 1] + 0.5 * F_plane[layer][posPF + 0]) / rho[layer][pos];
-                uy[layer][pos] = (Q_plane[layer][posPQ + 2] + 0.5 * F_plane[layer][posPF + 1]) / rho[layer][pos];
-                uz[layer][pos] = (Q_plane[layer][posPQ + 3] + 0.5 * F_plane[layer][posPF + 2]) / rho[layer][pos];
+                ux[layer][pos] = Float((Double(Q_plane[layer][posPQ + 1]) + 0.5 * Double(F_plane[layer][posPF + 0])) / Double(rho[layer][pos]))
+                uy[layer][pos] = Float((Double(Q_plane[layer][posPQ + 2]) + 0.5 * Double(F_plane[layer][posPF + 1])) / Double(rho[layer][pos]))
+                uz[layer][pos] = Float((Double(Q_plane[layer][posPQ + 3]) + 0.5 * Double(F_plane[layer][posPF + 2])) / Double(rho[layer][pos]))
                 
                 //                    std::cout << "calc_rho_ux_uy_uz  " << plane[layer][posPl + 0] << "  rho[]  " << rho[layer][pos] << std::endl;
                 

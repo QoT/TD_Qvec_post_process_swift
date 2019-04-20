@@ -92,6 +92,22 @@ struct Matrix2D<T: DefaultValuable> {
         grid = Array(repeating: T.defaultValue(), count: (rows+2) * (columns+2))
 
     }
+    
+    static func array(rows: Int, columns: Int, count: Int) -> [Matrix2D<T>] {
+
+        var array = Array<Matrix2D<T>>()
+        for _ in 0..<count {
+            array.append(Matrix2D<T>(rows: rows, columns: columns))
+        }
+        
+        return array
+    }
+    
+    func array<T>(grid: inout [T], generating t: () -> T, count: Int) {
+        for _ in 0..<count {
+            grid.append(t())
+        }
+    }
     func indexIsValid(row: Int, column: Int) -> Bool {
         return row >= 0 && row < rows && column >= 0 && column < columns
     }
@@ -150,6 +166,18 @@ struct Matrix3D<T: DefaultValuable> {
         // this form of array creation is valid only for pass-by-value content types like Float, Int, structs but not for classes
         grid = Array(repeating: T.defaultValue(), count: (rows+2) * (columns+2) * (planes+2))
     }
+
+    static func array(rows: Int, columns: Int, planes: Int, count: Int) -> [Matrix3D<T>] {
+        
+        var array = Array<Matrix3D<T>>()
+        for _ in 0..<count {
+            array.append(Matrix3D<T>(rows: rows, columns: columns, planes: planes))
+        }
+        
+        return array
+    }
+    
+
     func indexIsValid(row: Int, column: Int, plane: Int) -> Bool {
         return row >= 0 && row < rows && column >= 0 && column < columns && plane >= 0 && plane < planes
     }
@@ -188,110 +216,3 @@ struct Matrix3D<T: DefaultValuable> {
     }
     
 }
-
-//protocol Streamable {
-//    func allProperties() throws -> [String: Any]
-//}
-
-//extension Streamable {
-//    func allProperties() throws -> [String: Any] {
-//
-//        var result: [String: Any] = [:]
-//
-//        let mirror = Mirror(reflecting: self)
-//
-//        // Optional check to make sure we're iterating over a struct or class
-//        guard let style = mirror.displayStyle, style == .struct || style == .class else {
-//            throw NSError()
-//        }
-//
-//        for (property, value) in mirror.children {
-//            guard var property = property else {
-//                continue
-//            }
-//            result[property] = value
-//        }
-//
-//        return result
-//    }
-//
-//    func read( from file: UnsafeMutablePointer<FILE>) {
-//
-////        do {
-////            print(try self.allProperties())
-////        } catch {
-////            printError(error.localizedDescription)
-////        }
-//
-////        let fp: UnsafeMutablePointer<FILE>! = fopen(filename.c_str(), "r");
-//
-//        //    fread(tmp, sizeof(tDisk), q.bin_file_size_in_structs, fp);
-//
-//
-//        var bytesPointer = UnsafeMutableRawPointer.allocate(byteCount: 16, alignment: 1)
-////        bytesPointer.storeBytes(of: 0xFFFF_FFFF, as: UInt32.self)
-////
-////        // Load a value from the memory referenced by 'bytesPointer'
-////        let x = bytesPointer.load(as: UInt8.self)       // 255
-////
-////        // Load a value from the last two allocated bytes
-////        let offsetPointer = bytesPointer + 2
-////        let y = offsetPointer.load(as: UInt16.self)     // 65535
-//
-//        var number: UInt8 = 3
-//        var r2 = fread(UnsafeMutableRawPointer(&number), 1, sizeof(number), file);
-//        print(number)
-//         r2 = fread(UnsafeMutableRawPointer(&number), 1, sizeof(number), file);
-//        print(number)
-//         r2 = fread(UnsafeMutableRawPointer(&number), 1, sizeof(number), file);
-//        print(number)
-//         r2 = fread(UnsafeMutableRawPointer(&number), 1, sizeof(number), file);
-//        print(number)
-//        r2 = fread(UnsafeMutableRawPointer(&number), 1, sizeof(number), file);
-//        print(number)
-//
-//        let r = fread(bytesPointer, 1, 16, file);
-//
-//
-////        let u = UnsafeMutableRawPointer(&number)//.load(as: Int.self)
-//        UnsafeMutableRawPointer(&number).copyMemory(from: bytesPointer, byteCount: sizeof(number))
-//
-//
-//
-//        var x = bytesPointer.load(as: UInt8.self)
-//print(x)
-//        bytesPointer = bytesPointer.advanced(by: 1)
-//        x = bytesPointer.load(as: UInt8.self)
-//        print(x)
-//        bytesPointer = bytesPointer.advanced(by: 1)
-//        x = bytesPointer.load(as: UInt8.self)
-//        print(x)
-//        bytesPointer = bytesPointer.advanced(by: 1)
-//        x = bytesPointer.load(as: UInt8.self)
-//        print(x)
-//        bytesPointer = bytesPointer.advanced(by: 1)
-//        x = bytesPointer.load(as: UInt8.self)
-//        print(x)
-//        bytesPointer = bytesPointer.advanced(by: 1)
-//        x = bytesPointer.load(as: UInt8.self)
-//        print(x)
-//        bytesPointer = bytesPointer.advanced(by: 1)
-//        x = bytesPointer.load(as: UInt8.self)
-//        print(x)
-////                let offsetPointer = bytesPointer + 2
-////        x = offsetPointer.load(as: UInt8.self)
-////        print(x)
-//
-////        var i: Int = 0
-////        let a: UnsafeMutableRawPointer = UnsafeMutableRawPointer(0)
-////        fread(a, sizeof(Int), 1, file);
-////        i = *a
-//
-//        printMigration("read data from input file")
-//        //    fread(resultPointer, 1, size, fp)
-//
-//        bytesPointer.deallocate()
-////        fclose(fp);
-//
-//    }
-//}
