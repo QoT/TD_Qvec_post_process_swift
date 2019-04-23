@@ -62,6 +62,12 @@
             ReferencedContainer = "container:TD_Qvec_post_process.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "-v -d /Volumes/System/Downloads/Niall-O-Byrnes/TD_Qvec_post_process_new/TD_Rushton_Sample_Output_Qvec/plot_vertical_axis.XYplane.V_4.Q_4.step_00000050.cut_21"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
